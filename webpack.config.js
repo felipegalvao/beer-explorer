@@ -1,4 +1,5 @@
-var path = require("path");
+const path = require("path");
+const webpack = require("webpack");
 
 module.exports = {
   entry: ["./app/app.jsx"],
@@ -22,7 +23,7 @@ module.exports = {
         ]
       },
       {
-        test: /\.(scss|sass)$/,        
+        test: /\.(scss|sass)$/,
         use: [
           {
             loader: "style-loader"
@@ -36,5 +37,16 @@ module.exports = {
         ]
       }
     ]
-  }
+  },
+  devServer: {
+    contentBase: path.join(__dirname, "public"),
+    port: 3000
+  },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    // enable HMR globally
+
+    new webpack.NamedModulesPlugin()
+    // prints more readable module names in the browser console on HMR updates
+  ]
 };

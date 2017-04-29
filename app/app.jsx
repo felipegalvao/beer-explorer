@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import App from "./App/components/App.jsx";
+import App from "./screens/App/components/App.jsx";
 
 // App css
 require("bulma/bulma.sass");
