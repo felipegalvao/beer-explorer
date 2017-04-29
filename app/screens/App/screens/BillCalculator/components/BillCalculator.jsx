@@ -8,7 +8,7 @@ class BillCalculator extends Component {
           <h1 className="title is-1 has-text-centered">Bill Calculator</h1>
           <div className="columns">
             <div className="column is-half">
-              <p>Add SBill Row</p>
+              <p>Add Bill Row</p>
             </div>
             <div className="column is-half">
               <p>Bill List</p>

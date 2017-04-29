@@ -38,6 +38,9 @@ module.exports = {
       }
     ]
   },
+  resolve: {
+    modules: ["shared", "node_modules"]
+  },
   devServer: {
     contentBase: path.join(__dirname, "public"),
     port: 3000
