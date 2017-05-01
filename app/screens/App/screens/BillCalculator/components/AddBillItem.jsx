@@ -19,7 +19,8 @@ class AddBillItem extends React.Component {
 		const { dispatch } = this.props;
 
 		const item = {
-			description: this.state.description
+			description: this.state.description,
+			quantity: 0,
 		};
 		this.setState({
 			description: ""
