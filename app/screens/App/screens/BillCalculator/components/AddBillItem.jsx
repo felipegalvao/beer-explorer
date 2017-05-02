@@ -10,17 +10,20 @@ import * as actions from "../actions";
 
 class AddBillItem extends React.Component {
   state = {
-    description: "",
-    active: "",
+    formFields: {
+      description: "",
+      active: "",
+      unitPrice: ""
+    },
     errorMessage: ""
   };
 
-  handleDescriptionChange = (e: Event) => {
+  onInputChange = (e: Event) => {
     let currentTarget = e.target;
     if (currentTarget instanceof HTMLInputElement) {
-      this.setState({
-        description: currentTarget.value
-      });
+      const formFields = this.state.formFields;
+      formFields[currentTarget.name] = currentTarget.value;
+      this.setState({ formFields });
     }
   };
 
@@ -28,17 +31,20 @@ class AddBillItem extends React.Component {
     e.preventDefault();
     const { dispatch } = this.props;
 
-    if (this.state.active !== "") {
+    if (this.state.formFields.active !== "") {
       const item = {
-        description: this.state.description,
+        description: this.state.formFields.description,
         quantity: 1,
-        price: 25.00,
-        type: this.state.active
+        unitPrice: parseFloat(this.state.formFields.unitPrice),
+        type: this.state.formFields.active
       };
 
       this.setState({
-        description: "",
-        active: "",
+        formFields: {
+          description: "",
+          active: "",
+          unitPrice: ""
+        },
         errorMessage: ""
       });
 
@@ -58,16 +64,16 @@ class AddBillItem extends React.Component {
       "add-bill-item__button": true,
       button: true,
       "is-medium": true,
-      "is-active": this.state.active === "beer",
-      "is-info": this.state.active === "beer"
+      "is-active": this.state.formFields.active === "beer",
+      "is-info": this.state.formFields.active === "beer"
     });
 
     otherButtonClass = classNames({
       "add-bill-item__button": true,
       button: true,
       "is-medium": true,
-      "is-active": this.state.active === "other",
-      "is-info": this.state.active === "other"
+      "is-active": this.state.formFields.active === "other",
+      "is-info": this.state.formFields.active === "other"
     });
 
     return (
@@ -75,30 +81,53 @@ class AddBillItem extends React.Component {
         <h2 className="title is-2 has-text-centered">Add Bill Item</h2>
         <button
           className={beerButtonClass}
-          onClick={() => this.setState({ active: "beer" })}
+          onClick={() =>
+            this.setState({
+              formFields: { ...this.state.formFields, active: "beer" }
+            })}
         >
           Beer
         </button>
         <button
           className={otherButtonClass}
-          onClick={() => this.setState({ active: "other" })}
+          onClick={() =>
+            this.setState({
+              formFields: { ...this.state.formFields, active: "other" }
+            })}
         >
           Other
         </button>
         <form onSubmit={this.handleSubmit} className="add-bill-item__form">
-          <div className="field">
-            <label className="label">Label / Item</label>
-            <p className="control">
-              <input
-                type="text"
-                name="description"
-                onChange={this.handleDescriptionChange}
-                id="description"
-                value={this.state.description}
-                className="input" 
-                required
-              />
-            </p>
+          <div className="columns">
+            <div className="field column is-9">
+              <label className="label">Label / Item</label>
+              <p className="control">
+                <input
+                  type="text"
+                  name="description"
+                  onChange={this.onInputChange}
+                  id="description"
+                  value={this.state.formFields.description}
+                  className="input"
+                  required
+                />
+              </p>
+            </div>
+            <div className="field column is-3">
+              <label className="label">Unit Price</label>
+              <p className="control">
+                <input
+                  type="number"
+                  step="0.01"
+                  name="unitPrice"
+                  onChange={this.onInputChange}
+                  id="unitPrice"
+                  value={this.state.formFields.unitPrice}
+                  className="input"
+                  required
+                />
+              </p>
+            </div>
           </div>
           <p className="control">
             <button className="button is-primary is-large">Submit</button>

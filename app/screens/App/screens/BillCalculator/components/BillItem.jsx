@@ -16,7 +16,7 @@ export default class BillItem extends React.Component {
           </p>
         </div>
         <div className="column is-2">
-          <p>${this.props.price.toFixed(2)}</p>
+          <p>${this.props.unitPrice.toFixed(2)}</p>
         </div>
         <div className="column is-1">
           <button className="button">+</button>
