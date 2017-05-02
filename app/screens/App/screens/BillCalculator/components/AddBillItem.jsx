@@ -3,6 +3,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import classNames from "classnames";
+const uuidV1 = require('uuid/v1');
 
 import * as actions from "../actions";
 
@@ -21,6 +22,7 @@ class AddBillItem extends React.Component {
     errorMessage: ""
   };
 
+  // On change of Label / Item input field
   onDescriptionChange = (e: Event) => {
     let currentTarget = e.target;
     if (currentTarget instanceof HTMLInputElement) {
@@ -28,6 +30,7 @@ class AddBillItem extends React.Component {
     }
   };
 
+  // On change of Unit Price input field
   onUnitPriceChange = (e: Event) => {
     let currentTarget = e.target;
     if (currentTarget instanceof HTMLInputElement) {
@@ -39,8 +42,11 @@ class AddBillItem extends React.Component {
     e.preventDefault();
     const { dispatch } = this.props;
 
+    // If Type of Item to be Added is not set, show an error message to the User
+    // Otherwise, dispatch action "AddBillItem" with the Item object
     if (this.state.active !== "") {
       const item = {
+        id: uuidV1(),
         description: this.state.description,
         quantity: 1,
         unitPrice: parseFloat(this.state.unitPrice),
@@ -63,6 +69,7 @@ class AddBillItem extends React.Component {
   };
 
   render() {
+    // Generate classes for both buttons
     let beerButtonClass: string;
     let otherButtonClass: string;
 
@@ -85,20 +92,24 @@ class AddBillItem extends React.Component {
     return (
       <div id="add-bill-item" className="box">
         <h2 className="title is-2 has-text-centered">Add Bill Item</h2>
+
         <button
           className={beerButtonClass}
           onClick={() => this.setState({ active: "beer" })}
         >
           Beer
         </button>
+
         <button
           className={otherButtonClass}
           onClick={() => this.setState({ active: "other" })}
         >
           Other
         </button>
+
         <form onSubmit={this.handleSubmit} className="add-bill-item__form">
           <div className="columns">
+            {/* Column for the Label / Item Input Field */}
             <div className="field column is-9">
               <label className="label">Label / Item</label>
               <p className="control">
@@ -113,6 +124,7 @@ class AddBillItem extends React.Component {
                 />
               </p>
             </div>
+            {/* Column for the Unit Price Input Field */}
             <div className="field column is-3">
               <label className="label">Unit Price</label>
               <p className="control">
