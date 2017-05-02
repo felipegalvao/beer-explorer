@@ -27,6 +27,10 @@ export const billItemsReducer = (
           return billItem;
         }
       });
+    case "DELETE_BILL_ITEM":
+      return state.filter(billItem => {
+        return billItem.id !== action.id;
+      });
     default:
       return state;
   }

@@ -31,6 +31,11 @@ class BillItem extends React.Component {
     dispatch(actions.updateBillItem(this.props.id, updates));
   };
 
+  handleDeleteClick = (e: Event) => {
+    const { dispatch } = this.props;
+    dispatch(actions.deleteBillItem(this.props.id));
+  }
+
   render() {
     return (
       <div className="bill-item columns">
@@ -55,7 +60,7 @@ class BillItem extends React.Component {
           <button className="button" onClick={this.handleDecrementClick}>-</button>
         </div>
         <div className="column is-1">
-          <button className="button">X</button>
+          <button className="button" onClick={this.handleDeleteClick}>X</button>
         </div>
       </div>
     );
