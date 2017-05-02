@@ -6,24 +6,32 @@ import classNames from "classnames";
 
 import * as actions from "../actions";
 
-// declare var currentTarget: HTMLInputElement;
-
 class AddBillItem extends React.Component {
+  state: {
+    description: string,
+    active: string,
+    unitPrice: number,
+    errorMessage: string
+  };
+
   state = {
-    formFields: {
-      description: "",
-      active: "",
-      unitPrice: ""
-    },
+    description: "",
+    active: "",
+    unitPrice: 0,
     errorMessage: ""
   };
 
-  onInputChange = (e: Event) => {
+  onDescriptionChange = (e: Event) => {
     let currentTarget = e.target;
     if (currentTarget instanceof HTMLInputElement) {
-      const formFields = this.state.formFields;
-      formFields[currentTarget.name] = currentTarget.value;
-      this.setState({ formFields });
+      this.setState({ description: currentTarget.value });
+    }
+  };
+
+  onUnitPriceChange = (e: Event) => {
+    let currentTarget = e.target;
+    if (currentTarget instanceof HTMLInputElement) {
+      this.setState({ unitPrice: parseFloat(currentTarget.value) });
     }
   };
 
@@ -31,20 +39,18 @@ class AddBillItem extends React.Component {
     e.preventDefault();
     const { dispatch } = this.props;
 
-    if (this.state.formFields.active !== "") {
+    if (this.state.active !== "") {
       const item = {
-        description: this.state.formFields.description,
+        description: this.state.description,
         quantity: 1,
-        unitPrice: parseFloat(this.state.formFields.unitPrice),
-        type: this.state.formFields.active
+        unitPrice: parseFloat(this.state.unitPrice),
+        type: this.state.active
       };
 
       this.setState({
-        formFields: {
-          description: "",
-          active: "",
-          unitPrice: ""
-        },
+        description: "",
+        active: "",
+        unitPrice: 0,
         errorMessage: ""
       });
 
@@ -57,23 +63,23 @@ class AddBillItem extends React.Component {
   };
 
   render() {
-    let beerButtonClass;
-    let otherButtonClass;
+    let beerButtonClass: string;
+    let otherButtonClass: string;
 
     beerButtonClass = classNames({
       "add-bill-item__button": true,
       button: true,
       "is-medium": true,
-      "is-active": this.state.formFields.active === "beer",
-      "is-info": this.state.formFields.active === "beer"
+      "is-active": this.state.active === "beer",
+      "is-info": this.state.active === "beer"
     });
 
     otherButtonClass = classNames({
       "add-bill-item__button": true,
       button: true,
       "is-medium": true,
-      "is-active": this.state.formFields.active === "other",
-      "is-info": this.state.formFields.active === "other"
+      "is-active": this.state.active === "other",
+      "is-info": this.state.active === "other"
     });
 
     return (
@@ -81,19 +87,13 @@ class AddBillItem extends React.Component {
         <h2 className="title is-2 has-text-centered">Add Bill Item</h2>
         <button
           className={beerButtonClass}
-          onClick={() =>
-            this.setState({
-              formFields: { ...this.state.formFields, active: "beer" }
-            })}
+          onClick={() => this.setState({ active: "beer" })}
         >
           Beer
         </button>
         <button
           className={otherButtonClass}
-          onClick={() =>
-            this.setState({
-              formFields: { ...this.state.formFields, active: "other" }
-            })}
+          onClick={() => this.setState({ active: "other" })}
         >
           Other
         </button>
@@ -105,9 +105,9 @@ class AddBillItem extends React.Component {
                 <input
                   type="text"
                   name="description"
-                  onChange={this.onInputChange}
+                  onChange={this.onDescriptionChange}
                   id="description"
-                  value={this.state.formFields.description}
+                  value={this.state.description}
                   className="input"
                   required
                 />
@@ -120,9 +120,9 @@ class AddBillItem extends React.Component {
                   type="number"
                   step="0.01"
                   name="unitPrice"
-                  onChange={this.onInputChange}
+                  onChange={this.onUnitPriceChange}
                   id="unitPrice"
-                  value={this.state.formFields.unitPrice}
+                  value={this.state.unitPrice}
                   className="input"
                   required
                 />
