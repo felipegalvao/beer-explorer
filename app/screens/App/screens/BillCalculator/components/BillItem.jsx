@@ -21,10 +21,20 @@ class BillItem extends React.Component {
     dispatch(actions.updateBillItem(this.props.id, updates));
   };
 
+  handleDecrementClick = (e: Event) => {
+    const { dispatch } = this.props;
+
+    const updates = {
+      quantity: this.props.quantity - 1
+    };
+
+    dispatch(actions.updateBillItem(this.props.id, updates));
+  };
+
   render() {
     return (
       <div className="bill-item columns">
-        <div className="column is-7">
+        <div className="column is-5">
           <p>
             {this.props.description}
             <span className="bill-item__quantity"> x{this.props.quantity}</span>
@@ -33,13 +43,16 @@ class BillItem extends React.Component {
         <div className="column is-2">
           <p>${this.props.unitPrice.toFixed(2)}</p>
         </div>
+        <div className="column is-2">
+          <p>${(this.props.unitPrice*this.props.quantity).toFixed(2)}</p>
+        </div>
         <div className="column is-1">
           <button className="button" onClick={this.handleIncrementClick}>
             +
           </button>
         </div>
         <div className="column is-1">
-          <button className="button">-</button>
+          <button className="button" onClick={this.handleDecrementClick}>-</button>
         </div>
         <div className="column is-1">
           <button className="button">X</button>
