@@ -13,7 +13,7 @@ export default class BillItemsList extends React.Component {
 
 	render() {
 		const billItems = this.props.billItems.map((billItem, index) => (
-			<BillItem key={index} description={billItem.description} />
+			<BillItem key={index} {...billItem} />
 		));
 
 		return (

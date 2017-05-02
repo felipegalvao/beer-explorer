@@ -1,46 +1,62 @@
+// @flow
+
 import React from "react";
 import { connect } from "react-redux";
 import classNames from "classnames";
 
 import * as actions from "../actions";
 
+// declare var currentTarget: HTMLInputElement;
+
 class AddBillItem extends React.Component {
   state = {
     description: "",
-    active: ""
+    active: "",
+    errorMessage: ""
   };
 
-  handleDescriptionChange = e => {
-    this.setState({
-      description: e.target.value
-    });
+  handleDescriptionChange = (e: Event) => {
+    let currentTarget = e.target;
+    if (currentTarget instanceof HTMLInputElement) {
+      this.setState({
+        description: currentTarget.value
+      });
+    }
   };
 
-  handleSubmit = e => {
+  handleSubmit = (e: Event) => {
     e.preventDefault();
     const { dispatch } = this.props;
 
-    const item = {
-      description: this.state.description,
-      quantity: 0
-    };
-    this.setState({
-      description: ""
-    });
+    if (this.state.active !== "") {
+      const item = {
+        description: this.state.description,
+        quantity: 1,
+        price: 25.00,
+        type: this.state.active
+      };
 
-    dispatch(actions.addBillItem(item));
+      this.setState({
+        description: "",
+        active: "",
+        errorMessage: ""
+      });
+
+      dispatch(actions.addBillItem(item));
+    } else {
+      this.setState({
+        errorMessage: "You must select a type above to include a Bill Item"
+      });
+    }
   };
 
   render() {
     let beerButtonClass;
     let otherButtonClass;
 
-    console.log(this.state.active);
-
     beerButtonClass = classNames({
       "add-bill-item__button": true,
       button: true,
-      // "is-success": this.state.active === "",
       "is-medium": true,
       "is-active": this.state.active === "beer",
       "is-info": this.state.active === "beer"
@@ -49,7 +65,6 @@ class AddBillItem extends React.Component {
     otherButtonClass = classNames({
       "add-bill-item__button": true,
       button: true,
-      // "is-success": this.state.active === "",
       "is-medium": true,
       "is-active": this.state.active === "other",
       "is-info": this.state.active === "other"
@@ -57,7 +72,7 @@ class AddBillItem extends React.Component {
 
     return (
       <div id="add-bill-item" className="box">
-        <h2 className="title is-2">Add Bill Item</h2>
+        <h2 className="title is-2 has-text-centered">Add Bill Item</h2>
         <button
           className={beerButtonClass}
           onClick={() => this.setState({ active: "beer" })}
@@ -80,15 +95,16 @@ class AddBillItem extends React.Component {
                 onChange={this.handleDescriptionChange}
                 id="description"
                 value={this.state.description}
-                className="input"
+                className="input" 
+                required
               />
             </p>
-
           </div>
           <p className="control">
             <button className="button is-primary is-large">Submit</button>
           </p>
         </form>
+        {this.state.errorMessage === "" ? "" : <p>{this.state.errorMessage}</p>}
       </div>
     );
   }
