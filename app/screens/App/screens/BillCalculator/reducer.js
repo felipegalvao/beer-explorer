@@ -52,6 +52,11 @@ export const billReducer = (
         ...state,
         billItems: filteredBillItems
       };
+    case "TOGGLE_INCLUDE_TIP":
+      return {
+        ...state,
+        includeTip: !state.includeTip
+      }
     default:
       return state;
   }

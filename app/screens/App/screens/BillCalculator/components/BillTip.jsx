@@ -1,7 +1,10 @@
 import React, { PropTypes } from "react";
+import { connect } from "react-redux";
+
+import * as actions from "../actions";
 
 class BillTip extends React.Component {
-  state: {
+  props: {
     includeTip: boolean,
     tipPercentage: number
   };
@@ -19,13 +22,19 @@ class BillTip extends React.Component {
   };
 
   onIncludeTipChange = (e: Event) => {
-    let currentTarget = e.target;
-    if (currentTarget instanceof HTMLInputElement) {
-      this.setState({ includeTip: currentTarget.checked });
-    }
-  }
+    const { dispatch } = this.props;
+    dispatch(actions.toggleIncludeTip());
+
+    // let currentTarget = e.target;
+    // if (currentTarget instanceof HTMLInputElement) {
+    //   this.setState({ includeTip: currentTarget.checked });
+    // }
+  };
 
   render() {
+    const {bill} = this.props;
+    const {includeTip, tipPercentage} = bill;
+
     return (
       <div className="columns">
         <div className="field column is-2">
@@ -33,7 +42,7 @@ class BillTip extends React.Component {
             <label className="checkbox">
               <input
                 type="checkbox"
-                checked={this.state.includeTip}
+                checked={includeTip}
                 onChange={this.onIncludeTipChange}
               />
               Tip?
@@ -48,10 +57,10 @@ class BillTip extends React.Component {
               min="0"
               onChange={this.onTipPercentageChange}
               id="tipPercentage"
-              value={this.state.tipPercentage}
+              value={tipPercentage}
               className="input"
               required
-              disabled={!this.state.includeTip}
+              disabled={!includeTip}
             />
           </p>
         </div>
@@ -63,4 +72,6 @@ class BillTip extends React.Component {
   }
 }
 
-export default BillTip;
+export default connect(state => {
+  return state;
+})(BillTip);

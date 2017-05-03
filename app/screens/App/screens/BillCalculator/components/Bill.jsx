@@ -15,9 +15,7 @@ class Bill extends React.Component {
     // Calculate total value of the bill
     for (let i = 0; i < billItems.length; i++) {
       billValue += billItems[i].unitPrice * billItems[i].quantity;
-    }
-
-    console.log(includeTip);
+    }    
 
     if (includeTip) {
       billValue = billValue + (billValue * tipPercentage / 100);

@@ -22,3 +22,9 @@ export const deleteBillItem = (id: string): Action => {
     id
   };
 };
+
+export const toggleIncludeTip = (): Action => {
+  return {
+    type: "TOGGLE_INCLUDE_TIP"
+  };
+};
