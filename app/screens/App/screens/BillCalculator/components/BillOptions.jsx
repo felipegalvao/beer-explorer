@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 import BillTip from "./BillTip.jsx";
+import BillPersons from "./BillPersons.jsx";
 
 class BillOptions extends Component {
   onTipPercentageChange = (e: Event) => {
@@ -17,6 +18,7 @@ class BillOptions extends Component {
       <div className="box" id="bill-options">
         <h2 className="title is-2 has-text-centered">Bill Options</h2>
         <BillTip />
+        <BillPersons />
       </div>
     );
   }
