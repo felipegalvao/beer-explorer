@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Bill from "./Bill.jsx";
 import AddBillItem from "./AddBillItem.jsx";
+import BillOptions from "./BillOptions.jsx";
 
 class BillCalculator extends Component {
   render() {
@@ -11,6 +12,7 @@ class BillCalculator extends Component {
           <div className="columns">
             <div className="column is-half">
               <AddBillItem />
+              <BillOptions />
             </div>
             <div className="column is-half">
               <Bill />

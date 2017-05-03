@@ -8,20 +8,22 @@ class Bill extends React.Component {
   render() {
     const { billItems } = this.props;
     let billValue = 0;
-    
+
     // Calculate total value of the bill
     for (let i = 0; i < billItems.length; i++) {
-      billValue += billItems[i].unitPrice * billItems[i].quantity
-    };
+      billValue += billItems[i].unitPrice * billItems[i].quantity;
+    }
 
     return (
       <div className="box">
         <h2 className="title is-2 has-text-centered">Add Bill Item</h2>
         {billItems.length > 0
           ? ""
-          : <p>Your Bill still does not have any items</p>}
+          : <p>Your Bill does not have any items</p>}
         <BillItemList billItems={billItems} />
-        <BillTotal billValue={billValue} />
+        {billItems.length > 0
+          ? <BillTotal billValue={billValue} />
+          : ""}
       </div>
     );
   }
