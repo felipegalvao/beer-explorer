@@ -6,12 +6,21 @@ import { connect } from "react-redux";
 
 class Bill extends React.Component {
   render() {
-    const { billItems } = this.props;
+    const { bill } = this.props;
+    const billItems = bill.billItems;
+    const includeTip = bill.includeTip;
+    const tipPercentage = bill.tipPercentage;
     let billValue = 0;
 
     // Calculate total value of the bill
     for (let i = 0; i < billItems.length; i++) {
       billValue += billItems[i].unitPrice * billItems[i].quantity;
+    }
+
+    console.log(includeTip);
+
+    if (includeTip) {
+      billValue = billValue + (billValue * tipPercentage / 100);
     }
 
     return (

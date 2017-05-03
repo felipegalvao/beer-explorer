@@ -1,23 +1,36 @@
 // @flow
 import { Action } from "./types";
 
-type State = Array<{
-  id: string,
-  description: string,
-  quantity: number,
-  unitPrice: number,
-  type: string
-}>;
+type State = {
+  includeTip: boolean,
+  tipPercentage: number,
+  billItems: Array<{
+    id: string,
+    description: string,
+    quantity: number,
+    unitPrice: number,
+    type: string
+  }>
+};
 
-export const billItemsReducer = (
-  state: State = [],
+const initialState = {
+  includeTip: true,
+  tipPercentage: 10,
+  billItems: []
+};
+
+export const billReducer = (
+  state: State = initialState,
   action: Action
-): Array<Object> => {
+): State => {
   switch (action.type) {
     case "ADD_BILL_ITEM":
-      return [...state, action.billItem];
+      return {
+        ...state,
+        billItems: state.billItems.concat(action.billItem)
+      };
     case "UPDATE_BILL_ITEM":
-      return state.map(billItem => {
+      const updatedBillItems = state.billItems.map(billItem => {
         if (billItem.id === action.id) {
           return {
             ...billItem,
@@ -26,11 +39,19 @@ export const billItemsReducer = (
         } else {
           return billItem;
         }
-      });
+      })
+      return {
+        ...state,
+        billItems: updatedBillItems
+      };
     case "DELETE_BILL_ITEM":
-      return state.filter(billItem => {
+      const filteredBillItems = state.billItems.filter(billItem => {
         return billItem.id !== action.id;
-      });
+      })
+      return {
+        ...state,
+        billItems: filteredBillItems
+      };
     default:
       return state;
   }
