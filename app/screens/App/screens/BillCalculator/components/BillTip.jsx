@@ -24,11 +24,6 @@ class BillTip extends React.Component {
   onIncludeTipChange = (e: Event) => {
     const { dispatch } = this.props;
     dispatch(actions.toggleIncludeTip());
-
-    // let currentTarget = e.target;
-    // if (currentTarget instanceof HTMLInputElement) {
-    //   this.setState({ includeTip: currentTarget.checked });
-    // }
   };
 
   render() {

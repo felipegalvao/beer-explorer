@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest",
     "start": "webpack-dev-server --open",
-    "flow": "flow"
+    "flow": "flow",
+    "build": "webpack -p --config ./webpack.prod.config.js"
   },
   "author": "",
   "license": "ISC",
