@@ -57,6 +57,11 @@ export const billReducer = (
         ...state,
         includeTip: !state.includeTip
       }
+    case "SET_TIP_PERCENTAGE":
+      return {
+        ...state,
+        tipPercentage: action.tipPercentage
+      }
     default:
       return state;
   }

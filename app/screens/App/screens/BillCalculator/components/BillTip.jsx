@@ -15,9 +15,12 @@ class BillTip extends React.Component {
   };
 
   onTipPercentageChange = (e: Event) => {
+    const { dispatch } = this.props;
     let currentTarget = e.target;
+
     if (currentTarget instanceof HTMLInputElement) {
-      this.setState({ tipPercentage: currentTarget.value });
+      const tipPercentage = currentTarget.value;
+      dispatch(actions.setTipPercentage(tipPercentage));
     }
   };
 
@@ -27,8 +30,8 @@ class BillTip extends React.Component {
   };
 
   render() {
-    const {bill} = this.props;
-    const {includeTip, tipPercentage} = bill;
+    const { bill } = this.props;
+    const { includeTip, tipPercentage } = bill;
 
     return (
       <div className="columns">

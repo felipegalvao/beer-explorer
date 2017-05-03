@@ -28,3 +28,10 @@ export const toggleIncludeTip = (): Action => {
     type: "TOGGLE_INCLUDE_TIP"
   };
 };
+
+export const setTipPercentage = (tipPercentage: number): Action => {
+  return {
+    type: "SET_TIP_PERCENTAGE",
+    tipPercentage
+  };
+};
