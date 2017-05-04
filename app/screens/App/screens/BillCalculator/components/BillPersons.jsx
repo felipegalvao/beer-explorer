@@ -1,36 +1,36 @@
 import React, { PropTypes } from "react";
+import { connect } from "react-redux";
+
+import * as actions from "../actions";
 
 class BillPersons extends React.Component {
-  state: {
-    persons: number
-  };
-
-  state = {
-    persons: 1
-  };
-
   onPersonsChange = (e: Event) => {
+    const { dispatch } = this.props;
     let currentTarget = e.target;
+
     if (currentTarget instanceof HTMLInputElement) {
-      this.setState({ persons: currentTarget.value });
+      const personsToPay = currentTarget.value;
+      dispatch(actions.setPersonsToPay(personsToPay));
     }
-  }
+  };
 
   render() {
+    const {personsToPay} = this.props.bill;
+
     return (
       <div className="columns">
         <div className="field column is-5">
-          <label className="label">Persons to Pay</label>
+          <label className="label">Persons that will Pay</label>
           <p className="control">
             <input
               className="input"
               type="number"
               min="1"
               placeholder="Persons to Pay"
-              value={this.state.persons}
+              value={personsToPay}
               onChange={this.onPersonsChange}
-              name="persons"
-              id="persons"
+              name="personsToPay"
+              id="personsToPay"
             />
           </p>
         </div>
@@ -39,4 +39,6 @@ class BillPersons extends React.Component {
   }
 }
 
-export default BillPersons;
+export default connect(state => {
+  return state;
+})(BillPersons);

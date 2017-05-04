@@ -4,3 +4,4 @@ export type Action =
   | { type: "DELETE_BILL_ITEM", id: string }
   | { type: "TOGGLE_INCLUDE_TIP" }
   | { type: "SET_TIP_PERCENTAGE", tipPercentage: number }
+  | { type: "SET_PERSONS_TO_PAY", personsToPay: number };

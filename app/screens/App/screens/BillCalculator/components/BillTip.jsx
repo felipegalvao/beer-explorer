@@ -4,16 +4,6 @@ import { connect } from "react-redux";
 import * as actions from "../actions";
 
 class BillTip extends React.Component {
-  props: {
-    includeTip: boolean,
-    tipPercentage: number
-  };
-
-  state = {
-    includeTip: false,
-    tipPercentage: 10
-  };
-
   onTipPercentageChange = (e: Event) => {
     const { dispatch } = this.props;
     let currentTarget = e.target;

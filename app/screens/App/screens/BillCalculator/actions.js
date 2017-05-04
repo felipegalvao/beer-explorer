@@ -35,3 +35,10 @@ export const setTipPercentage = (tipPercentage: number): Action => {
     tipPercentage
   };
 };
+
+export const setPersonsToPay = (personsToPay: number): Action => {
+  return {
+    type: "SET_PERSONS_TO_PAY",
+    personsToPay
+  };
+};

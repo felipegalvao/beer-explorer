@@ -4,6 +4,7 @@ import { Action } from "./types";
 type State = {
   includeTip: boolean,
   tipPercentage: number,
+  personsToPay: number,
   billItems: Array<{
     id: string,
     description: string,
@@ -16,6 +17,7 @@ type State = {
 const initialState = {
   includeTip: true,
   tipPercentage: 10,
+  personsToPay: 1,
   billItems: []
 };
 
@@ -39,7 +41,7 @@ export const billReducer = (
         } else {
           return billItem;
         }
-      })
+      });
       return {
         ...state,
         billItems: updatedBillItems
@@ -47,7 +49,7 @@ export const billReducer = (
     case "DELETE_BILL_ITEM":
       const filteredBillItems = state.billItems.filter(billItem => {
         return billItem.id !== action.id;
-      })
+      });
       return {
         ...state,
         billItems: filteredBillItems
@@ -56,12 +58,17 @@ export const billReducer = (
       return {
         ...state,
         includeTip: !state.includeTip
-      }
+      };
     case "SET_TIP_PERCENTAGE":
       return {
         ...state,
         tipPercentage: action.tipPercentage
-      }
+      };
+    case "SET_PERSONS_TO_PAY":
+      return {
+        ...state,
+        personsToPay: action.personsToPay
+      };
     default:
       return state;
   }
