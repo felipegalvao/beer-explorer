@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import * as actions from "../actions";
 
-class BillTip extends React.Component {
+export class BillTip extends React.Component {
   onTipPercentageChange = (e: Event) => {
     const { dispatch } = this.props;
     let currentTarget = e.target;

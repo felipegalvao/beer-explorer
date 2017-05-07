@@ -4,7 +4,7 @@ import BillTotal from "./BillTotal.jsx";
 
 import { connect } from "react-redux";
 
-class Bill extends React.Component {
+export class Bill extends React.Component {
   render() {
     const { bill } = this.props;
     const billItems:ArrayOf<Object> = bill.billItems;

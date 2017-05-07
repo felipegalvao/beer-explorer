@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import * as actions from "../actions";
 
-class BillPersons extends React.Component {
+export class BillPersons extends React.Component {
   onPersonsChange = (e: Event) => {
     const { dispatch } = this.props;
     let currentTarget = e.target;

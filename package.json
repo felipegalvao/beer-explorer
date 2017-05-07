@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
+    "test:watch": "npm test -- --watch",
     "start": "webpack-dev-server --open",
     "flow": "flow",
     "build": "webpack -p --config ./webpack.prod.config.js"

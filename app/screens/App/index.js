@@ -7,18 +7,16 @@ import BillCalculator from "./screens/BillCalculator";
 import BeerExplorer from "./screens/BeerExplorer";
 import Nav from "./components/Nav.jsx";
 
-class App extends Component {
-  render() {
-    return (
-      <Router>
-        <div>
-          <Nav />
-          <Route exact path="/" component={BillCalculator} />
-          <Route path="/beer-explorer" component={BeerExplorer} />
-        </div>
-      </Router>
-    );
-  }
-}
+const App = () => {
+  return (
+    <Router>
+      <div>
+        <Nav />
+        <Route exact path="/" component={BillCalculator} />
+        <Route path="/beer-explorer" component={BeerExplorer} />
+      </div>
+    </Router>
+  );
+};
 
 export default App;

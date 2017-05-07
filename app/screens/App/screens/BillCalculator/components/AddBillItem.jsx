@@ -7,7 +7,7 @@ const uuidV1 = require('uuid/v1');
 
 import * as actions from "../actions";
 
-class AddBillItem extends React.Component {
+export class AddBillItem extends React.Component {
   state: {
     description: string,
     active: string,

@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import BillTip from "./BillTip.jsx";
 import BillPersons from "./BillPersons.jsx";
 
-class BillOptions extends Component {
+export class BillOptions extends Component {
   onTipPercentageChange = (e: Event) => {
     let currentTarget = e.target;
     if (currentTarget instanceof HTMLInputElement) {

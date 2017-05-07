@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class BillTotal extends Component {
+export class BillTotal extends Component {
   render() {
     return (
       <div className="bill-total">

@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import * as actions from "../actions";
 
-class BillItem extends React.Component {
+export class BillItem extends React.Component {
   state: {
     errorMessage: string
   };
