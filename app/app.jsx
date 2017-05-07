@@ -2,7 +2,7 @@ import { Provider } from "react-redux";
 import React from "react";
 import ReactDOM from "react-dom";
 
-import App from "./screens/App/components/App.jsx";
+import App from "./screens/App";
 const store = require("./shared/store/configureStore.jsx").configure();
 
 // App css

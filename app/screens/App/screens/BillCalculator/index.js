@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import Bill from "./Bill.jsx";
-import AddBillItem from "./AddBillItem.jsx";
-import BillOptions from "./BillOptions.jsx";
+import Bill from "./components/Bill.jsx";
+import AddBillItem from "./components/AddBillItem.jsx";
+import BillOptions from "./components/BillOptions.jsx";
 
 class BillCalculator extends Component {
   render() {

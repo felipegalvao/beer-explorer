@@ -3,10 +3,9 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
-import BillCalculator
-  from "../screens/BillCalculator/components/BillCalculator.jsx";
-import BeerExplorer from "../screens/BeerExplorer/components/BeerExplorer.jsx";
-import Nav from "./Nav.jsx";
+import BillCalculator from "./screens/BillCalculator";
+import BeerExplorer from "./screens/BeerExplorer";
+import Nav from "./components/Nav.jsx";
 
 class App extends Component {
   render() {
