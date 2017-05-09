@@ -5,11 +5,13 @@ import { breweryDBApiKey } from "../../../../secrets";
 module.exports = {
   searchBeers: () => {
     return axios
-      .get("http://api.brewerydb.com/v2/search", { params: {
-        key: breweryDBApiKey,
-        type: "beer",
-        q: "heineken"
-      }})
+      .get("http://api.brewerydb.com/v2/search", {
+        params: {
+          q: "heineken",
+          key: breweryDBApiKey,
+          type: "beer"
+        }
+      })
       .then(res => {
         return res.data;
       })
