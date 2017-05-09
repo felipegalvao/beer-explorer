@@ -34,6 +34,4 @@ export const Bill = props => {
   );
 };
 
-export default connect(state => {
-  return state;
-})(Bill);
+export default Bill;
