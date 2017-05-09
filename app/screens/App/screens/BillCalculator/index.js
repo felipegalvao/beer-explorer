@@ -35,10 +35,8 @@ const BillCalculator = ({ bill }) => {
   );
 };
 
-// function mapStateToProps(state) {
-//   return { bill: state.bill };
-// };
+const mapStateToProps = (state) => {
+  return { bill: state.bill };
+}
 
-export default connect(state => {
-  return state;
-})(BillCalculator);
+export default connect(mapStateToProps)(BillCalculator);
