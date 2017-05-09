@@ -1,11 +1,8 @@
 // @flow
 
 import React from "react";
-import { connect } from "react-redux";
 import classNames from "classnames";
 const uuidV1 = require('uuid/v1');
-
-import * as actions from "../actions";
 
 export class AddBillItem extends React.Component {
   state: {
@@ -40,7 +37,6 @@ export class AddBillItem extends React.Component {
 
   handleSubmit = (e: Event) => {
     e.preventDefault();
-    const { dispatch } = this.props;
 
     // If Type of Item to be Added is not set, show an error message to the User
     // Otherwise, dispatch action "AddBillItem" with the Item object
@@ -60,7 +56,7 @@ export class AddBillItem extends React.Component {
         errorMessage: ""
       });
 
-      dispatch(actions.addBillItem(item));
+      this.props.onAddBillItem(item);
     } else {
       this.setState({
         errorMessage: "You must select a type above to include a Bill Item"
@@ -151,4 +147,4 @@ export class AddBillItem extends React.Component {
   }
 }
 
-export default connect()(AddBillItem);
+export default AddBillItem;
