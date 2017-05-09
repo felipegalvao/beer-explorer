@@ -2,7 +2,7 @@
 
 import React from "react";
 import classNames from "classnames";
-const uuidV1 = require('uuid/v1');
+const uuidV1 = require("uuid/v1");
 
 export class AddBillItem extends React.Component {
   state: {
