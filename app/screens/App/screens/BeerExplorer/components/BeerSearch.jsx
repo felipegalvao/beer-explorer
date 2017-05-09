@@ -8,7 +8,7 @@ class BeerSearch extends Component {
           <input
             className="input"
             type="text"
-            placeholder="Find a repository"
+            placeholder="Search for a beer label"
           />
         </p>
         <p className="control">
